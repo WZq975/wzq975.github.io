@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ziqiang Wang</title>
+<meta name="author" content="Ziqiang Wang">
+<meta name="description" content="Ziqiang Wang (王自强) is a Ph.D. candidate at Concordia University and Mila working on LLM-based GUI and mobile agents: LLM-judge evaluation and self-improving agents that adapt at test time.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Ziqiang Wang">
+<meta property="og:description" content="Ph.D. candidate at Concordia University &amp; Mila working on LLM-based GUI and mobile agents.">
+<meta property="og:url" content="https://wzq975.github.io/">
+<meta property="og:image" content="https://wzq975.github.io/assets/img/portrait.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230F4C81'/%3E%3Ctext x='32' y='42' font-family='Helvetica,Arial,sans-serif' font-size='27' font-weight='700' fill='%23fff' text-anchor='middle'%3EZW%3C/text%3E%3C/svg%3E">
+<link rel="preload" href="assets/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+  // Before first paint: enable JS-only effects and apply a saved theme choice.
+  document.documentElement.classList.add('js');
+  try {
+    var savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark' || savedTheme === 'light') document.documentElement.setAttribute('data-theme', savedTheme);
+  } catch (e) {}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Ziqiang Wang","alternateName":"王自强","url":"https://wzq975.github.io/","image":"https://wzq975.github.io/assets/img/portrait.jpg","jobTitle":"Ph.D. Candidate in Computer Science","affiliation":[{"@type":"CollegeOrUniversity","name":"Concordia University"},{"@type":"ResearchOrganization","name":"Mila - Quebec AI Institute"}],"alumniOf":{"@type":"CollegeOrUniversity","name":"Shanghai University"},"sameAs":["https://scholar.google.com/citations?user=1CYvfKMAAAAJ"],"knowsAbout":["GUI agents","Mobile agents","LLM-as-a-judge","Test-time adaptation"]}
+</script>
+<style>
+/* Fonts are self-hosted (SIL OFL, see assets/fonts). On Apple devices the system
+   Charter is used; elsewhere Charis SIL, a Charter derivative, stands in for the
+   CV's XCharter. Headings use Source Sans 3, as in the CV. */
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("assets/fonts/source-sans-3-latin-wght-normal.woff2") format("woff2");
+  font-weight: 200 900; font-style: normal; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Charis SIL";
+  src: url("assets/fonts/charis-sil-latin-400-normal.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Charis SIL";
+  src: url("assets/fonts/charis-sil-latin-400-italic.woff2") format("woff2");
+  font-weight: 400; font-style: italic; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Charis SIL";
+  src: url("assets/fonts/charis-sil-latin-700-normal.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ---------- theme tokens (light = CV palette) ---------- */
+:root {
+  --bg: #ffffff;
+  --bg-glass: rgba(255, 255, 255, .8);
+  --card: #ffffff;
+  --text: #1f2430;
+  --muted: #5b6470;
+  --faint: #8b94a1;
+  --rule: #c9d2dc;
+  --rule-soft: #e5eaf0;
+  --accent: #0f4c81;
+  --accent-2: #3a7bc8;
+  --accent-tint: #f2f6fb;
+  --accent-tint-2: #e6eef7;
+  --chip-line: #c3d3e4;
+  --on-accent: #ffffff;
+  --award: #9a6700;
+  --hl: rgba(58, 123, 200, .17);
+  --ok-fg: #17663a;
+  --ok-bg: #effaf3;
+  --ok-line: #bfe6cf;
+  --dot: rgba(15, 76, 129, .17);
+  --blob-1: rgba(58, 123, 200, .16);
+  --blob-2: rgba(95, 180, 220, .13);
+  --shadow: rgba(15, 76, 129, .3);
+  --serif: Charter, "Charis SIL", "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+  --sans: "Source Sans 3", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+:root[data-theme="dark"] {
+  --bg: #0f1217; --bg-glass: rgba(15, 18, 23, .8); --card: #141922;
+  --text: #e5e8ed; --muted: #a3abb7; --faint: #7d8693; --rule: #343d4a; --rule-soft: #232a34;
+  --accent: #8db9e6; --accent-2: #b5d4f4; --accent-tint: #162130; --accent-tint-2: #1c2b3d; --chip-line: #34506d;
+  --on-accent: #0f1520; --award: #e2b650; --hl: rgba(141, 185, 230, .24);
+  --ok-fg: #9be8bf; --ok-bg: rgba(61, 220, 151, .08); --ok-line: rgba(61, 220, 151, .28);
+  --dot: rgba(141, 185, 230, .16); --blob-1: rgba(70, 130, 205, .2); --blob-2: rgba(95, 180, 220, .1); --shadow: rgba(0, 0, 0, .55);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1217; --bg-glass: rgba(15, 18, 23, .8); --card: #141922;
+    --text: #e5e8ed; --muted: #a3abb7; --faint: #7d8693; --rule: #343d4a; --rule-soft: #232a34;
+    --accent: #8db9e6; --accent-2: #b5d4f4; --accent-tint: #162130; --accent-tint-2: #1c2b3d; --chip-line: #34506d;
+    --on-accent: #0f1520; --award: #e2b650; --hl: rgba(141, 185, 230, .24);
+    --ok-fg: #9be8bf; --ok-bg: rgba(61, 220, 151, .08); --ok-line: rgba(61, 220, 151, .28);
+    --dot: rgba(141, 185, 230, .16); --blob-1: rgba(70, 130, 205, .2); --blob-2: rgba(95, 180, 220, .1); --shadow: rgba(0, 0, 0, .55);
+  }
+}
+
+/* ---------- base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 76px; }
+body {
+  margin: 0; position: relative; background: var(--bg); color: var(--text);
+  font: 17px/1.62 var(--serif); font-kerning: normal;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  transition: background-color .35s, color .35s;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+b, strong { font-weight: 700; }
+svg { width: 1em; height: 1em; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+::selection { background: var(--hl); }
+.wrap { position: relative; z-index: 1; max-width: 876px; margin: 0 auto; padding: 0 28px; }
+
+/* decorative backdrop behind the header: dot grid + soft blue glow */
+.hero-bg { position: absolute; inset: 0 0 auto 0; height: 680px; overflow: hidden; pointer-events: none; }
+.hero-bg::before {
+  content: ""; position: absolute; inset: 0;
+  background-image: radial-gradient(var(--dot) 1.1px, transparent 1.4px); background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(ellipse 46% 70% at 74% 18%, #000 8%, transparent 70%);
+          mask-image: radial-gradient(ellipse 46% 70% at 74% 18%, #000 8%, transparent 70%);
+}
+.hero-bg::after {
+  content: ""; position: absolute; left: calc(50% - 120px); top: -200px; width: 760px; height: 600px;
+  background: radial-gradient(closest-side at 50% 50%, var(--blob-1), transparent 72%),
+              radial-gradient(closest-side at 80% 30%, var(--blob-2), transparent 70%);
+}
+
+/* ---------- sticky top bar ---------- */
+.topbar { position: sticky; top: 0; z-index: 50; transition: background-color .3s, box-shadow .3s; }
+.topbar.scrolled { background: var(--bg-glass); -webkit-backdrop-filter: blur(14px) saturate(160%); backdrop-filter: blur(14px) saturate(160%); box-shadow: 0 1px 0 var(--rule-soft); }
+.topbar-inner { display: flex; align-items: center; gap: 20px; max-width: 876px; height: 60px; margin: 0 auto; padding: 0 28px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font: 700 15px/1 var(--sans); letter-spacing: .02em; color: var(--text); }
+.brand:hover { text-decoration: none; }
+.brand-mark { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 7px; background: var(--accent); color: var(--on-accent); font: 700 11.5px/1 var(--sans); letter-spacing: .05em; }
+.brand-name { opacity: 0; transform: translateY(6px); transition: opacity .35s, transform .35s; }
+.topbar.past-hero .brand-name { opacity: 1; transform: none; }
+.nav-links { display: flex; gap: 22px; margin-left: auto; font: 600 14px/1 var(--sans); }
+.nav-links a { position: relative; padding: 6px 0; color: var(--muted); transition: color .2s; }
+.nav-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 2px; border-radius: 2px; background: var(--accent); transform: scaleX(0); transition: transform .3s; }
+.nav-links a:hover { color: var(--text); text-decoration: none; }
+.nav-links a.active { color: var(--accent); }
+.nav-links a.active::after { transform: scaleX(1); }
+.theme-btn { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--rule-soft); border-radius: 50%; background: transparent; color: var(--muted); font-size: 16px; cursor: pointer; transition: color .2s, border-color .2s, transform .4s; }
+.theme-btn:hover { color: var(--accent); border-color: var(--chip-line); transform: rotate(-20deg); }
+.theme-btn .sun { display: none; }
+:root[data-theme="dark"] .theme-btn .sun { display: block; }
+:root[data-theme="dark"] .theme-btn .moon { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-btn .sun { display: block; }
+  :root:not([data-theme="light"]) .theme-btn .moon { display: none; }
+}
+.progress { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; pointer-events: none; }
+.progress span { display: block; height: 100%; transform-origin: 0 50%; transform: scaleX(0); background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+
+/* ---------- hero ---------- */
+.hero { display: flex; align-items: center; justify-content: space-between; gap: 40px; padding-top: 54px; }
+.status { display: inline-flex; align-items: center; gap: 9px; margin: 0 0 18px; padding: 5px 13px 5px 11px; border: 1px solid var(--ok-line); border-radius: 999px; background: var(--ok-bg); font: 600 13.5px/1.3 var(--sans); color: var(--ok-fg); }
+.dot { position: relative; width: 8px; height: 8px; flex: none; border-radius: 50%; background: #22c55e; }
+.dot::after { content: ""; position: absolute; inset: -4px; border: 1.5px solid #22c55e; border-radius: 50%; opacity: 0; animation: ping 2.4s cubic-bezier(0, 0, .2, 1) infinite; }
+@keyframes ping { 0% { transform: scale(.6); opacity: .8; } 80%, 100% { transform: scale(1.7); opacity: 0; } }
+.name { margin: 0; font: 700 37px/1.1 var(--sans); letter-spacing: .07em; text-transform: uppercase; }
+.name-en { background: linear-gradient(100deg, var(--text) 30%, var(--accent) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.name .zh { margin-left: .5em; font-size: .62em; font-weight: 400; letter-spacing: .1em; color: var(--muted); }
+.role { margin: 12px 0 0; font: 400 17px/1.55 var(--sans); color: var(--muted); }
+.sep { margin: 0 .45em; color: var(--faint); }
+.contact { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 20px 0 0; padding: 0; list-style: none; }
+.pill { display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 15px; border: 1px solid var(--chip-line); border-radius: 999px; background: var(--bg-glass); font: 600 14.5px/1 var(--sans); color: var(--text); transition: color .2s, border-color .2s, transform .2s, box-shadow .2s; }
+.pill svg { font-size: 16px; color: var(--accent); }
+.pill:hover { text-decoration: none; color: var(--accent); border-color: var(--accent); transform: translateY(-1px); box-shadow: 0 8px 18px -10px var(--shadow); }
+.email-group { display: inline-flex; align-items: center; gap: 6px; }
+.copy { position: relative; display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid var(--chip-line); border-radius: 50%; background: var(--bg-glass); color: var(--muted); font-size: 15px; cursor: pointer; transition: color .2s, border-color .2s; }
+.copy:hover { color: var(--accent); border-color: var(--accent); }
+.copy .check { display: none; }
+.copy.ok { color: var(--ok-fg); border-color: var(--ok-line); }
+.copy.ok .check { display: block; }
+.copy.ok .clip { display: none; }
+.copied { font: 600 13px/1 var(--sans); color: var(--ok-fg); }
+.portrait-wrap { position: relative; width: 172px; height: 172px; flex: none; isolation: isolate; }
+.portrait-wrap::before { content: ""; position: absolute; inset: -7px; z-index: -2; border-radius: 50%; background: conic-gradient(var(--accent), var(--accent-2), #9fd0f5, var(--accent-2), var(--accent)); animation: spin 16s linear infinite; }
+.portrait-wrap::after { content: ""; position: absolute; inset: -3px; z-index: -1; border-radius: 50%; background: var(--bg); transition: background-color .35s; }
+.portrait { display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; box-shadow: 0 22px 44px -18px var(--shadow); transition: transform .5s cubic-bezier(.2, .7, .2, 1); }
+.portrait-wrap:hover .portrait { transform: scale(1.035); }
+@keyframes spin { to { transform: rotate(1turn); } }
+.top-rule { height: 1.5px; margin: 34px 0 0; border: 0; background: linear-gradient(90deg, var(--accent), var(--rule) 45%, transparent); }
+
+/* ---------- about ---------- */
+.summary { margin: 24px 0 0; }
+.hl {
+  background-image: linear-gradient(transparent 60%, var(--hl) 60%, var(--hl) 92%, transparent 92%);
+  background-repeat: no-repeat; background-size: 100% 100%;
+  animation: sweep 1.3s cubic-bezier(.2, .7, .2, 1) .75s both;
+}
+@keyframes sweep { from { background-size: 0% 100%; } }
+
+/* entrance for the header block */
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+.hero-copy > *, .portrait-wrap, .top-rule, .summary { animation: rise .8s cubic-bezier(.2, .7, .2, 1) both; }
+.hero-copy > :nth-child(2) { animation-delay: .07s; }
+.hero-copy > :nth-child(3) { animation-delay: .14s; }
+.hero-copy > :nth-child(4) { animation-delay: .21s; }
+.portrait-wrap { animation-delay: .18s; }
+.top-rule { animation-delay: .28s; }
+.summary { animation-delay: .34s; }
+
+/* ---------- sections ---------- */
+section { margin-top: 56px; }
+.sec-head { position: relative; display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-bottom: 8px; margin-bottom: 18px; }
+.sec-head::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1.5px; background: linear-gradient(90deg, var(--accent), var(--rule) 38%, var(--rule-soft)); transform-origin: 0 50%; transition: transform 1.1s cubic-bezier(.2, .7, .2, 1) .1s; }
+h2 { margin: 0; font: 700 14.5px/1 var(--sans); letter-spacing: .15em; text-transform: uppercase; color: var(--accent); }
+.sec-note { display: inline-flex; align-items: center; gap: 4px; font: 500 14px/1 var(--sans); color: var(--muted); }
+.sec-note:hover { color: var(--accent); text-decoration: none; }
+
+/* scroll reveal (JS adds .in) */
+.js .reveal { opacity: 0; transform: translateY(22px); transition: opacity .8s ease, transform .8s cubic-bezier(.2, .7, .2, 1); }
+.js .reveal.in { opacity: 1; transform: none; }
+.js .reveal:not(.in) .sec-head::after { transform: scaleX(0); }
+
+/* ---------- selected research cards ---------- */
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.card { display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--rule-soft); border-radius: 14px; background: var(--card); transition: transform .35s cubic-bezier(.2, .7, .2, 1), box-shadow .35s, border-color .35s; }
+.card:hover { transform: translateY(-4px); border-color: var(--chip-line); box-shadow: 0 22px 44px -22px var(--shadow); }
+.media { position: relative; display: block; overflow: hidden; aspect-ratio: 2.1 / 1; background: #fff; border-bottom: 1px solid var(--rule-soft); }
+.media img { position: absolute; inset: 10px 12px; width: calc(100% - 24px); height: calc(100% - 20px); object-fit: contain; transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
+.card:hover .media img { transform: scale(1.04); }
+.card-body { display: flex; flex: 1; flex-direction: column; gap: 8px; padding: 16px 18px 18px; }
+.badges { display: flex; flex-wrap: wrap; gap: 6px; }
+.badge { padding: 5px 8px; border-radius: 5px; background: var(--accent-tint-2); font: 700 12.5px/1 var(--sans); letter-spacing: .02em; color: var(--accent); }
+.badge.pre { padding: 4px 7px; border: 1px solid var(--chip-line); background: transparent; }
+.card h3 { margin: 4px 0 0; font: 700 19px/1.28 var(--serif); }
+.card .sub { margin: -2px 0 0; font: 400 15px/1.4 var(--sans); color: var(--muted); }
+.card p { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--muted); }
+.card .links { display: flex; gap: 8px; margin-top: auto; padding-top: 6px; }
+
+/* ---------- news timeline ---------- */
+.timeline { list-style: none; margin: 0; padding: 0; }
+.timeline li { position: relative; display: grid; grid-template-columns: 82px 20px 1fr; column-gap: 12px; padding: 6px 0; }
+.timeline li::before { content: ""; grid-column: 2; grid-row: 1; justify-self: center; width: 11px; height: 11px; margin-top: 8px; border: 2px solid var(--accent); border-radius: 50%; background: var(--bg); z-index: 1; }
+.timeline li::after { content: ""; position: absolute; left: 103.5px; top: 25px; bottom: -9px; width: 1px; background: var(--rule); }
+.timeline li:last-child::after { display: none; }
+.timeline li:first-child::before { background: var(--accent); box-shadow: 0 0 0 4px var(--accent-tint-2); }
+.timeline time { grid-column: 1; grid-row: 1; font: 600 14.5px/1.75 var(--sans); color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.timeline .tl-body { grid-column: 3; grid-row: 1; }
+.new { display: inline-block; margin-right: 6px; padding: 3px 6px; border-radius: 4px; background: var(--accent); color: var(--on-accent); font: 700 10.5px/1 var(--sans); letter-spacing: .08em; vertical-align: 2px; }
+
+/* ---------- entries ---------- */
+.row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+.date { font: 400 14.5px/1.5 var(--sans); color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.ctx { margin: 3px 0 0; font: 400 15px/1.5 var(--sans); color: var(--muted); }
+.bullets { margin: 8px 0 0; padding-left: 1.15em; }
+.bullets li { margin: 4px 0; }
+.bullets li::marker { color: var(--accent); }
+.xp { position: relative; padding: 18px 20px 16px; border: 1px solid var(--rule-soft); border-radius: 14px; background: linear-gradient(180deg, var(--accent-tint), transparent 75%); }
+.xp::before { content: ""; position: absolute; left: -1px; top: 18px; bottom: 18px; width: 3px; border-radius: 3px; background: linear-gradient(var(--accent), var(--accent-2)); }
+
+.edu { position: relative; margin: 0; padding: 0 0 0 28px; list-style: none; }
+.edu::before { content: ""; position: absolute; left: 5px; top: 12px; bottom: 30px; width: 1.5px; background: linear-gradient(var(--accent), var(--rule-soft)); }
+.edu li { position: relative; padding-bottom: 18px; }
+.edu li:last-child { padding-bottom: 0; }
+.edu li::before { content: ""; position: absolute; left: -28px; top: 7px; width: 12px; height: 12px; border: 2px solid var(--accent); border-radius: 50%; background: var(--bg); }
+.edu li:first-child::before { background: var(--accent); box-shadow: 0 0 0 4px var(--accent-tint-2); }
+
+/* ---------- papers ---------- */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 6px; }
+.filters button { padding: 8px 13px; border: 1px solid var(--chip-line); border-radius: 999px; background: transparent; font: 600 13.5px/1 var(--sans); color: var(--muted); cursor: pointer; transition: color .2s, background .2s, border-color .2s; }
+.filters button span { margin-left: 5px; font-weight: 500; color: var(--faint); }
+.filters button:hover { border-color: var(--accent); color: var(--accent); }
+.filters button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: var(--on-accent); }
+.filters button[aria-pressed="true"] span { color: inherit; opacity: .75; }
+.group[hidden] { display: none; }
+.cat { display: flex; align-items: center; gap: 10px; margin: 26px 0 6px; font: 700 13.5px/1 var(--sans); letter-spacing: .11em; text-transform: uppercase; }
+.cat::before { content: ""; width: 7px; height: 7px; background: var(--accent); transform: rotate(45deg); }
+.pubs { list-style: none; margin: 0; padding: 0; }
+.pub { position: relative; display: grid; grid-template-columns: 116px 1fr; gap: 18px; margin: 0 -14px; padding: 11px 14px; border-radius: 10px; transition: background-color .25s; }
+.pub::before { content: ""; position: absolute; left: 0; top: 14px; bottom: 14px; width: 3px; border-radius: 3px; background: var(--accent); transform: scaleY(0); transition: transform .25s; }
+.pub:hover { background: var(--accent-tint); }
+.pub:hover::before { transform: scaleY(1); }
+.tag { padding-top: 1px; }
+.v { display: inline-block; padding: 3px 7px; border: 1px solid transparent; border-radius: 5px; background: var(--accent-tint-2); font: 700 13px/1.25 var(--sans); color: var(--accent); white-space: nowrap; }
+.v.pre { border-color: var(--chip-line); background: transparent; }
+.tag small { display: block; margin-top: 4px; font: 500 12.5px/1.25 var(--sans); color: var(--muted); }
+.title { margin: 0; font-weight: 700; line-height: 1.38; }
+.authors { margin: 3px 0 0; font-size: 15.5px; line-height: 1.5; color: var(--muted); }
+.authors b { color: var(--text); }
+.meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin: 6px 0 0; font: 400 14.5px/1.4 var(--sans); color: var(--muted); }
+.venue { margin-right: 4px; font: italic 400 15px/1.4 var(--serif); }
+.chip { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border: 1px solid var(--chip-line); border-radius: 5px; background: var(--card); font: 600 12.5px/1.2 var(--sans); letter-spacing: .02em; color: var(--accent); transition: background .2s, color .2s, border-color .2s, transform .2s; }
+.chip:hover { text-decoration: none; border-color: var(--accent); background: var(--accent); color: var(--on-accent); transform: translateY(-1px); }
+
+/* ---------- service & honors ---------- */
+.label { margin: 0 0 8px; font: 700 13.5px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--text); }
+.chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 0; padding: 0; list-style: none; }
+.chips li { padding: 7px 10px; border-radius: 7px; background: var(--accent-tint); font: 700 13px/1 var(--sans); color: var(--text); transition: background .2s, transform .2s; }
+.chips li:hover { background: var(--accent-tint-2); transform: translateY(-1px); }
+.chips li span { margin-left: 5px; font-weight: 400; color: var(--muted); }
+.ta { margin: 18px 0 0; font: 400 16px/1.55 var(--serif); }
+.honors { list-style: none; margin: 0; padding: 0; }
+.honors li { display: grid; grid-template-columns: 56px 1fr; gap: 12px; align-items: baseline; padding: 7px 0; border-bottom: 1px dashed var(--rule-soft); }
+.honors li:last-child { border-bottom: 0; }
+.honors .yr { font: 700 14px/1.6 var(--sans); color: var(--accent); font-variant-numeric: tabular-nums; }
+.honors .medal { display: inline-flex; margin-right: 6px; color: var(--award); vertical-align: -2px; }
+
+/* ---------- footer ---------- */
+.foot-rule { height: 1px; margin: 64px 0 0; border: 0; background: linear-gradient(90deg, transparent, var(--rule), transparent); }
+.foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 0 40px; font: 400 13.5px/1.5 var(--sans); color: var(--faint); }
+.totop { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: var(--muted); }
+.totop:hover { color: var(--accent); text-decoration: none; }
+
+/* ---------- small screens ---------- */
+@media (max-width: 760px) {
+  .nav-links { display: none; }
+  .theme-btn { margin-left: auto; }
+  .cards { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  body { font-size: 16.5px; }
+  .wrap, .topbar-inner { padding: 0 20px; }
+  .hero { flex-direction: column-reverse; align-items: flex-start; gap: 26px; padding-top: 28px; }
+  .portrait-wrap { width: 112px; height: 112px; }
+  .name { font-size: 27px; }
+  .name .zh { display: block; margin: 8px 0 0; font-size: .7em; }
+  .timeline li { grid-template-columns: 20px 1fr; padding: 6px 0 10px; }
+  .timeline li::before { grid-column: 1; }
+  .timeline li::after { left: 9.5px; }
+  .timeline time { grid-column: 2; grid-row: 1; line-height: 1.6; }
+  .timeline .tl-body { grid-column: 2; grid-row: 2; }
+  .pub { grid-template-columns: 1fr; gap: 6px; }
+  .tag { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
+  .tag small { margin: 0; }
+  .row { flex-direction: column; gap: 0; }
+  .sec-head { flex-wrap: wrap; }
+  .foot { flex-direction: column; align-items: flex-start; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1; transform: none; }
+  .js .reveal:not(.in) .sec-head::after { transform: none; }
+}
+</style>
+</head>
+<body>
+<div class="hero-bg" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top"><span class="brand-mark">ZW</span><span class="brand-name">Ziqiang Wang</span></a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#research">Research</a><a href="#news">News</a><a href="#experience">Experience</a><a href="#papers">Papers</a><a href="#education">Education</a>
+    </nav>
+    <button class="theme-btn" type="button" aria-label="Toggle dark mode">
+      <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>
+    </button>
+  </div>
+  <div class="progress" aria-hidden="true"><span></span></div>
+</header>
+
+<main class="wrap" id="top">
+
+  <header class="hero">
+    <div class="hero-copy">
+      <p class="status"><span class="dot"></span>Open to industry roles on AI agents · graduating Dec 2026</p>
+      <h1 class="name"><span class="name-en">Ziqiang Wang</span><span class="zh" lang="zh-CN">王自强</span></h1>
+      <p class="role">Ph.D. Candidate in Computer Science<br>Concordia University &amp; Mila<span class="sep">·</span>Montréal, Canada</p>
+      <ul class="contact">
+        <li class="email-group">
+          <a class="pill" href="mailto:ziqiang.wang@mail.concordia.ca"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 7.5 8.5 6 8.5-6"/></svg>ziqiang.wang@mail.concordia.ca</a>
+          <button class="copy" type="button" data-copy="ziqiang.wang@mail.concordia.ca" aria-label="Copy email address">
+            <svg class="clip" viewBox="0 0 24 24" aria-hidden="true"><rect x="8.5" y="8.5" width="11" height="11" rx="2.2"/><path d="M15.5 8.5V6.7a2.2 2.2 0 0 0-2.2-2.2H6.7a2.2 2.2 0 0 0-2.2 2.2v6.6a2.2 2.2 0 0 0 2.2 2.2h1.8"/></svg>
+            <svg class="check" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+          </button>
+          <span class="copied" role="status" aria-live="polite"></span>
+        </li>
+        <li><a class="pill" href="https://scholar.google.com/citations?user=1CYvfKMAAAAJ&amp;hl=en"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9.5 12 5l10 4.5-10 4.5z"/><path d="M6.5 11.8v4c0 1.3 2.5 2.7 5.5 2.7s5.5-1.4 5.5-2.7v-4"/><path d="M22 9.5V15"/></svg>Google Scholar</a></li>
+      </ul>
+    </div>
+    <div class="portrait-wrap"><img class="portrait" src="assets/img/portrait.jpg" width="172" height="172" alt="Portrait of Ziqiang Wang"></div>
+  </header>
+  <hr class="top-rule">
+
+  <p class="summary">I am a final-year Ph.D. candidate in Computer Science at Concordia University and Mila – Quebec AI Institute, advised by Prof. Yang Wang. I work on <b class="hl">LLM-based GUI and mobile agents</b>, along two lines: <b class="hl">LLM-judge evaluation</b> of agent trajectories, validated downstream as reward signals for RL (GRPO) training, and <b class="hl">self-improving GUI agents</b> that adapt at test time after deployment, building on my earlier work on test-time adaptation of vision–language models. I was a research intern at Noah's Ark Lab, Huawei Canada (2025–2026).</p>
+
+  <section id="research" class="reveal">
+    <div class="sec-head"><h2>Selected Research</h2></div>
+    <div class="cards">
+      <article class="card">
+        <a class="media" href="https://arxiv.org/abs/2609.34321" aria-label="One Rollout Is All You Get on arXiv"><img src="assets/img/solo-teaser.webp" width="1400" height="598" loading="lazy" alt="SOLO overview: a GUI agent with a frozen backbone and a LoRA adapter makes one attempt per task; an LLM judge labels the episode, and admitted episodes update the adapter."></a>
+        <div class="card-body">
+          <div class="badges"><span class="badge pre">arXiv 2026</span></div>
+          <h3>One Rollout Is All You Get</h3>
+          <p class="sub">Fully test-time adaptation for GUI agents</p>
+          <p>A deployed agent gets one attempt per task, with no retries or ground-truth labels. SOLO learns from its own judged episodes through a small LoRA adapter, improving success by 3–6 points over the frozen agent.</p>
+          <div class="links"><a class="chip" href="https://arxiv.org/abs/2609.34321">arXiv</a><a class="chip" href="https://github.com/WZq975/SOLO">Project</a></div>
+        </div>
+      </article>
+      <article class="card">
+        <a class="media" href="https://arxiv.org/abs/2608.11434" aria-label="MobileJudgeBench on arXiv"><img src="assets/img/mjb-overview.webp" width="1400" height="719" loading="lazy" alt="MobileJudgeBench overview: benchmark construction from six task sources, judge evaluation across methods and LLM backends, and downstream validation for evaluation and RL training."></a>
+        <div class="card-body">
+          <div class="badges"><span class="badge">Findings of EACL 2027</span></div>
+          <h3>MobileJudgeBench</h3>
+          <p class="sub">Benchmarking LLM judges for mobile agent evaluation</p>
+          <p>931 human-annotated trajectories for testing LLM judges. A simple screenshot-sampling judge reaches up to 90.9% accuracy, and judge quality predicts both agent-ranking fidelity and RL training with judges as rewards.</p>
+          <div class="links"><a class="chip" href="https://arxiv.org/abs/2608.11434">arXiv</a><a class="chip" href="https://github.com/WZq975/MobileJudgeBench">Code &amp; data</a></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="news" class="reveal">
+    <div class="sec-head"><h2>News</h2></div>
+    <ol class="timeline">
+      <li><time datetime="2026-11">Nov 2026</time><div class="tl-body"><span class="new">NEW</span><a href="https://arxiv.org/abs/2608.11434">Benchmarking LLM Judges for Mobile Agent Evaluation</a> (MobileJudgeBench) was accepted to Findings of EACL 2027.</div></li>
+      <li><time datetime="2026-09">Sep 2026</time><div class="tl-body">Released <a href="https://arxiv.org/abs/2609.34321">One Rollout Is All You Get</a>, on fully test-time adaptation for GUI agents.</div></li>
+      <li><time datetime="2026-09">Sep 2026</time><div class="tl-body"><i>Learning to Adapt</i> received the <b>Best Paper Award</b> at the ECCV 2026 Workshop on Multimodal Digital Agents.</div></li>
+      <li><time datetime="2025-06">Jun 2025</time><div class="tl-body">Joined Noah's Ark Lab, Huawei Canada as a research intern, working on mobile-agent evaluation.</div></li>
+    </ol>
+  </section>
+
+  <section id="experience" class="reveal">
+    <div class="sec-head"><h2>Industry Experience</h2></div>
+    <div class="xp">
+      <div class="row"><span><b>Research Intern, Noah's Ark Lab</b><span class="sep">·</span><i>Huawei Canada</i></span><span class="date">Jun 2025 – Feb 2026</span></div>
+      <p class="ctx">Mobile-agent research program: a large-scale Android-emulator environment for systematic agent evaluation and RL training of mobile-control agents.</p>
+      <ul class="bullets">
+        <li>Owned <b>automatic trajectory evaluation</b>: built <b>MobileJudgeBench</b>, a benchmark of 931 human-annotated trajectories for LLM-as-judge evaluation of mobile agents (Findings of EACL 2027).</li>
+        <li>Designed a simple screenshot-sampling judge that is competitive with or better than purpose-built judges (up to 90.9% accuracy), and validated the judges as rewards for GRPO training of mobile agents.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="papers" class="reveal">
+    <div class="sec-head"><h2>Papers</h2><a class="sec-note" href="https://scholar.google.com/citations?user=1CYvfKMAAAAJ&amp;hl=en">Full list on Google Scholar<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
+    <div class="filters" role="group" aria-label="Filter papers">
+      <button type="button" data-f="all" aria-pressed="true">All<span>15</span></button>
+      <button type="button" data-f="gui" aria-pressed="false">GUI Agents<span>7</span></button>
+      <button type="button" data-f="tta" aria-pressed="false">Test-Time Adaptation<span>5</span></button>
+      <button type="button" data-f="other" aria-pressed="false">Others<span>3</span></button>
+    </div>
+
+    <div class="group" data-cat="gui">
+      <h3 class="cat">GUI Agents</h3>
+      <ol class="pubs">
+        <li class="pub">
+          <div class="tag"><span class="v pre">arXiv 2026</span></div>
+          <div>
+            <p class="title">One Rollout Is All You Get: Fully Test-Time Adaptation for GUI Agents</p>
+            <p class="authors"><b>Z. Wang</b>, L. Gu, Z. Chi, L. Jiang, Z. Jiang, L. Guo, S. Reid, Z. Liu, Y. Wang</p>
+            <p class="meta"><a class="chip" href="https://arxiv.org/abs/2609.34321">arXiv</a><a class="chip" href="https://github.com/WZq975/SOLO">Project</a></p>
+          </div>
+        </li>
+        <li class="pub">
+          <div class="tag"><span class="v">EACL 2027</span><small>Findings</small></div>
+          <div>
+            <p class="title">Benchmarking LLM Judges for Mobile Agent Evaluation</p>
+            <p class="authors"><b>Z. Wang</b>, L. Gu, Z. Chi, Z. Liu, S. M. Ayyoubzadeh, Y. Yu, Y. Wang</p>
+            <p class="meta"><span class="venue">Findings of EACL 2027</span><a class="chip" href="https://arxiv.org/abs/2608.11434">arXiv</a><a class="chip" href="https://github.com/WZq975/MobileJudgeBench">Code &amp; data</a></p>
+          </div>
+        </li>
+        <li class="pub">
+          <div class="tag"><span class="v">ECCVW 2026</span><small>Best Paper</small></div>
+          <div>
+            <p class="title">Learning to Adapt: Few-Shot Generalization of Mobile Agents to Unseen Applications</p>
+            <p class="authors">S. Reid, L. Gu, Z. Chi, L. Guo, Z. Jiang, <b>Z. Wang</b>, Y. Yu, Y. Wang</p>
+            <p class="meta"><span class="venue">ECCV 2026 Workshop on Multimodal Digital Agents</span>Best Paper Award (spotlight talk)</p>
+          </div>
+        </li>
+        <li class="pub">
+          <div class="tag"><span class="v">CVPR 2026</span></div>
+          <div>
+            <p class="title">Widget2Code: From Visual Widgets to UI Code via Multimodal LLMs</p>
+            <p class="authors">H. H. Zhang, T. Zhang, B. Lin, Y. Xue, Y. Zhu, H. Liu, L. Gu, L. Ye, <b>Z. Wang</b>, X. Zuo, Y. Wang, Y. Yu, Z. Chi</p>
+            <p class="meta"><a class="chip" href="https://arxiv.org/abs/2512.19918">arXiv</a></p>
+          </div>
+        </li>
+        <li class="pub">
+          <div class="tag"><span class="v pre">arXiv 2026</span></div>
+          <div>
+            <p class="title">CoAdapt-GUI: Joint Workflow Context and Policy Adaptation for Unseen GUI Applications</p>
+            <p class="authors">L. Guo, L. Gu, Z. Jiang, Z. Chi, S. Reid, <b>Z. Wang</b>, Y. Yu, W. Liu, Y. Wang, T.-H. Chen</p>
+            <p class="meta"><a class="chip" href="https://arxiv.org/abs/2608.11588">arXiv</a></p>
+          </div>
+        </li>
+        <li class="pub">
+          <div class="tag"><span class="v pre">arXiv 2026</span></div>
+          <div>
+            <p class="title">Beyond the GUI Paradigm: Do Mobile Agents Need the Phone Screen?</p>
+            <p class="authors">L. Gu, Z. Jiang, L. Guo, Z. Chi, <b>Z. Wang</b>, H. Liu, Y. Yu, T.-H. Chen, Y. Wang</p>
+            <p class="meta"><a class="chip" href="https://arxiv.org/abs/2606.19388">arXiv</a></p>
+          </div>
+        </li>
+        <li class="pub">
+          <div class="tag"><span class="v pre">arXiv 2026</span></div>
+          <div>
+            <p class="title">Generalization in Online Reinforcement Learning for Mobile Agents</p>
+            <p class="authors">L. Gu, Z. Jiang, Z. Chi, H. Liu, <b>Z. Wang</b>, Y. Yu, G. Berseth, Y. Wang</p>
+            <p class="meta"><a class="chip" href="https://arxiv.org/abs/2603.07432">arXiv</a></p>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <div class="group" data-cat="tta">
+      <h3 class="cat">Test-Time Adaptation</h3>
+      <ol class="pubs">
+        <li class="pub">
+          <div class="tag"><span class="v">ECCV 2024</span></div>
+          <div>
+            <p class="title">Distribution Alignment for Fully Test-Time Adaptation with Dynamic Online Data Streams</p>
+            <p class="authors"><b>Z. Wang</b>, Z. Chi, Y. Wu, L. Gu, Z. Liu, K. N. Plataniotis, Y. Wang</p>
+            <p class="meta"><a class="chip" href="https://arxiv.org/abs/2407.12128">arXiv</a><a class="chip" href="https://github.com/WZq975/DA-TTA">Code</a></p>
+          </div>
+        </li>
+        <li class="pub">
+          <div class="tag"><span class="v">ECCV 2026</span></div>
+          <div>
+            <p class="title">DA-MergeLoRA: Hypernetwork-Based LoRA Merging for Few-Shot Test-Time Domain Adaptation</p>
+            <p class="authors">S. Reid, Z. Chi, L. Gu, O. R. Heidari, <b>Z. Wang</b>, Y. Wang</p>
+            <p class="meta"><a class="chip" href="https://arxiv.org/abs/2607.17467">arXiv</a></p>
+          </div>
+        </li>
+        <li class="pub">
+          <div class="tag"><span class="v">NeurIPS 2025</span></div>
+          <div>
+            <p class="title">PointMAC: Meta-Learned Adaptation for Robust Test-Time Point Cloud Completion</p>
+            <p class="authors">L. Jiang, R. Ma, L. Gu, <b>Z. Wang</b>, X. Zuo, Y. Wang</p>
+            <p class="meta"><a class="chip" href="https://arxiv.org/abs/2510.10365">arXiv</a></p>
+          </div>
+        </li>
+        <li class="pub">
+          <div class="tag"><span class="v">ICLR 2025</span></div>
+          <div>
+            <p class="title">Learning to Adapt Frozen CLIP for Few-Shot Test-Time Domain Adaptation</p>
+            <p class="authors">Z. Chi, L. Gu, H. Liu, <b>Z. Wang</b>, Y. Wu, Y. Wang, K. N. Plataniotis</p>
+            <p class="meta"><a class="chip" href="https://arxiv.org/abs/2506.17307">arXiv</a></p>
+          </div>
+        </li>
+        <li class="pub">
+          <div class="tag"><span class="v">WACV 2025</span></div>
+          <div>
+            <p class="title">DocTTT: Test-Time Training for Handwritten Document Recognition Using Meta-Auxiliary Learning</p>
+            <p class="authors">W. Gu, L. Gu, <b>Z. Wang</b>, C. Y. Suen, Y. Wang</p>
+            <p class="meta"><a class="chip" href="https://arxiv.org/abs/2501.12898">arXiv</a></p>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <div class="group" data-cat="other">
+      <h3 class="cat">Others</h3>
+      <ol class="pubs">
+        <li class="pub">
+          <div class="tag"><span class="v">IEEE TMM 2021</span></div>
+          <div>
+            <p class="title">Spatio-Temporal Self-Attention Network for Video Saliency Prediction</p>
+            <p class="authors"><b>Z. Wang</b>, Z. Liu, G. Li, Y. Wang, T. Zhang, L. Xu, J. Wang</p>
+            <p class="meta"><span class="venue">Early access 2021, published 2023</span><a class="chip" href="https://arxiv.org/abs/2108.10696">arXiv</a><a class="chip" href="https://github.com/WZq975/STSANet">Code</a></p>
+          </div>
+        </li>
+        <li class="pub">
+          <div class="tag"><span class="v">IVC 2021</span></div>
+          <div>
+            <p class="title">SalED: Saliency Prediction with a Pithy Encoder-Decoder Architecture Sensing Local and Global Information</p>
+            <p class="authors"><b>Z. Wang</b>, Z. Liu, W. Wei, H. Duan</p>
+            <p class="meta"><span class="venue">Image and Vision Computing</span><a class="chip" href="https://github.com/WZq975/SalED">Code</a></p>
+          </div>
+        </li>
+        <li class="pub">
+          <div class="tag"><span class="v">ICCV 2025</span></div>
+          <div>
+            <p class="title">Plug-in Feedback Self-Adaptive Attention in CLIP for Training-Free Open-Vocabulary Segmentation</p>
+            <p class="authors">Z. Chi, Y. Wu, L. Gu, H. Liu, <b>Z. Wang</b>, Y. Zhang, Y. Wang, K. N. Plataniotis</p>
+            <p class="meta"><a class="chip" href="https://arxiv.org/abs/2508.20265">arXiv</a></p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="education" class="reveal">
+    <div class="sec-head"><h2>Education</h2></div>
+    <ol class="edu">
+      <li>
+        <div class="row"><b>Ph.D. in Computer Science</b><span class="date">Sep 2022 – Dec 2026 (expected)</span></div>
+        <div class="row"><i>Concordia University · Mila – Quebec AI Institute</i><span class="date">Montréal, Canada</span></div>
+        <p class="ctx">Advisor: Prof. Yang Wang<span class="sep">·</span>Research: GUI/mobile agents, test-time adaptation</p>
+      </li>
+      <li>
+        <div class="row"><b>M.Eng. in Communication and Information Systems</b><span class="date">Sep 2019 – Jun 2022</span></div>
+        <div class="row"><i>Shanghai University</i><span class="date">Shanghai, China</span></div>
+        <p class="ctx">Advisor: Prof. Zhi Liu<span class="sep">·</span>Outstanding Master's Thesis Award, Shanghai Graphics &amp; Image Association</p>
+      </li>
+      <li>
+        <div class="row"><b>B.Eng. in Communication Engineering</b><span class="date">Sep 2015 – Jun 2019</span></div>
+        <div class="row"><i>Shanghai University</i><span class="date">Shanghai, China</span></div>
+      </li>
+    </ol>
+  </section>
+
+  <section id="service" class="reveal">
+    <div class="sec-head"><h2>Service &amp; Teaching</h2></div>
+    <p class="label">Reviewer</p>
+    <ul class="chips">
+      <li>NeurIPS<span>2024–26</span></li>
+      <li>ICLR<span>2025–27</span></li>
+      <li>CVPR<span>2025–26</span></li>
+      <li>ECCV<span>2024, 26</span></li>
+      <li>WACV<span>2025–27</span></li>
+      <li>AAAI<span>2026</span></li>
+      <li>COLM<span>2026</span></li>
+      <li>ACM MM<span>2025</span></li>
+      <li>IEEE TMM</li>
+    </ul>
+    <p class="ta"><b>Teaching assistant:</b> Machine Learning; Computer Vision, Concordia University (2023, 2024)</p>
+  </section>
+
+  <section id="honors" class="reveal">
+    <div class="sec-head"><h2>Honors &amp; Awards</h2></div>
+    <ul class="honors">
+      <li><span class="yr">2026</span><span><span class="medal"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="m8.6 13.4-1.6 7.1 5-2.6 5 2.6-1.6-7.1"/></svg></span>Best Paper Award, Multimodal Digital Agents Workshop at ECCV 2026</span></li>
+      <li><span class="yr">2023</span><span>Outstanding Master's Thesis Award, Shanghai Graphics &amp; Image Association</span></li>
+      <li><span class="yr">2022</span><span>China Scholarship Council (CSC) Scholarship</span></li>
+      <li><span class="yr">2022</span><span>Frederick Lowy Fellowship and International Tuition Award of Excellence, Concordia University</span></li>
+      <li><span class="yr">2021</span><span>National Scholarship for Postgraduates, China</span></li>
+      <li><span class="yr">2021</span><span>First Prize, Academic Scholarship, Shanghai University</span></li>
+    </ul>
+  </section>
+
+  <hr class="foot-rule">
+  <footer class="foot">
+    <span>© 2026 Ziqiang Wang · Last updated November 2026</span>
+    <a class="totop" href="#top">Back to top<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a>
+  </footer>
+</main>
+
+<script>
+(function () {
+  var root = document.documentElement;
+
+  // Theme toggle: follows the system until the visitor picks one.
+  var mq = window.matchMedia('(prefers-color-scheme: dark)');
+  document.querySelector('.theme-btn').addEventListener('click', function () {
+    var current = root.getAttribute('data-theme') || (mq.matches ? 'dark' : 'light');
+    var next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  });
+
+  // Copy email to clipboard.
+  var copyBtn = document.querySelector('.copy');
+  var copied = document.querySelector('.copied');
+  copyBtn.addEventListener('click', function () {
+    if (!navigator.clipboard) return;
+    navigator.clipboard.writeText(copyBtn.getAttribute('data-copy')).then(function () {
+      copyBtn.classList.add('ok');
+      copied.textContent = 'Copied';
+      setTimeout(function () { copyBtn.classList.remove('ok'); copied.textContent = ''; }, 1800);
+    }, function () {});
+  });
+
+  // Top bar: glass background once scrolled, name after the header, progress bar.
+  var bar = document.querySelector('.topbar');
+  var progress = document.querySelector('.progress span');
+  var heroName = document.querySelector('.name');
+  var ticking = false;
+  function onScroll() {
+    var y = window.scrollY;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.classList.toggle('scrolled', y > 8);
+    bar.classList.toggle('past-hero', heroName.getBoundingClientRect().bottom < 60);
+    progress.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, y / max) : 0) + ')';
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
+  onScroll();
+
+  // Reveal sections as they scroll in, and highlight the current section in the nav.
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var revealer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('in'); revealer.unobserve(entry.target); }
+      });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
+    reveals.forEach(function (el) { revealer.observe(el); });
+
+    var links = {};
+    document.querySelectorAll('.nav-links a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        Object.keys(links).forEach(function (id) { links[id].classList.toggle('active', id === entry.target.id); });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    document.querySelectorAll('section[id]').forEach(function (s) { spy.observe(s); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add('in'); });
+  }
+
+  // Paper filters: All / per topic.
+  var buttons = document.querySelectorAll('.filters button');
+  var groups = document.querySelectorAll('.group');
+  buttons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var f = btn.getAttribute('data-f');
+      buttons.forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+      groups.forEach(function (g) { g.hidden = !(f === 'all' || g.getAttribute('data-cat') === f); });
+    });
+  });
+})();
+</script>
+</body>
+</html>
